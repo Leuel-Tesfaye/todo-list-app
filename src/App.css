@@ -226,3 +226,45 @@ input:focus::placeholder {
   color: rgb(4, 196, 106);
 }
 
+
+/* Responsive media queries */
+
+/* Small devices (up to 768px) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  .todo-wrapper {
+    padding: 4%;
+    max-height: none;
+  }
+
+  .todo-input {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+
+  .todo-input-item {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .todo-input-item input {
+    width: 100%;
+  }
+
+  /* ... adjust other styles as needed for smaller screens ... */
+}
+
+/* Medium devices (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* ... adjust styles for medium-sized screens ... */
+}
+
+/* Large devices (1024px and above) */
+@media (min-width: 1025px) {
+  /* ... adjust styles for large screens ... */
+}
