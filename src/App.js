@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-
+import { MdDelete } from 'react-icons/md';
+import { BsCheckLg } from 'react-icons/bs';
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
   return (
@@ -44,9 +45,16 @@ function App() {
 
         <div className='todo-list'>
           <div className='todo-list-item'>
+            <div>
             <h3>Task 1</h3>
             <p>Description</p>
+            </div>
+            <div>
+          <MdDelete className= 'icon' />
+          <BsCheckLg className= 'check-icon' />
           </div>
+          </div>
+          
         </div>
       </div>
     </div>
