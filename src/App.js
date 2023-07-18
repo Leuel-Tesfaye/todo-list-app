@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import './App.css';
 import { MdDelete } from 'react-icons/md';
 import { BsCheckLg } from 'react-icons/bs';
@@ -13,9 +13,18 @@ function App() {
       description : newDescription
     }
     let updatedTodoArr = [...allTodo];
-    updatedTodoArr.push(newTodoItem)
-    setTodo(updatedTodoArr)
+    updatedTodoArr.push(newTodoItem);
+    setTodo(updatedTodoArr);
+    localStorage.setItem('todoList', JSON.stringify(updatedTodoArr))
   }
+
+  /** use effect : when ever the page is loaded for the first time */
+    useEffect (() =>{
+      let savedTodo = JSON.parse(localStorage.getItem('todoList'))
+      if(savedTodo) {
+        setTodo(savedTodo)
+      }
+    },[])
   return (
     <div className="App">
       <h1>My Todo's</h1>
