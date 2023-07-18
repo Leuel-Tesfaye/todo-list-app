@@ -205,26 +205,178 @@ input:focus::placeholder {
   letter-spacing: .5px;
   font-family: 'Roboto';
 }
+/*  -------icons Delete and check-------*/
+.icons{
+  display: flex;
+  margin: 10px;
+}
 
-.icon {
-  font-size: 25px;
+.icons button,
+.icons label {
+  margin-right: 10px; /* Adjust the value as needed */
+}
+
+
+.delete-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
   cursor: pointer;
-}
-.icon:hover{
-  color: red;
-  transition: ease-in 0.3s;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
 }
 
-.check-icon {
-  font-size: 25px;
-  margin-left: 10px;
-  color: rgb(0, 230, 122);
+.delete-svgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+.delete-svgIcon path {
+  fill: white;
+}
+
+.delete-button:hover {
+  width: 90px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.delete-button:hover .delete-svgIcon {
+  width: 15px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.delete-button::before {
+  display: none;
+  content: "Delete";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.delete-button:hover::before {
+  display: block;
+  padding-right: 10px;
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+}
+/* Hide the default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
   cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
-.check-icon:hover{
-  color: rgb(4, 196, 106);
+.container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 21px;
+  user-select: none;
+  animation: jello-horizontal 0.9s both;
 }
+
+.checkMark:hover {
+  animation: jello-horizontal 0.9s both;
+}
+
+/* Create a custom checkbox */
+.checkMark {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 1.3em;
+  width: 1.3em;
+  border-radius: 50%;
+  background-color: #eee;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkMark {
+  background-color: royalblue;
+}
+
+/* Create the.checkMark/indicator (hidden when not checked) */
+.checkMark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the.checkMark when checked */
+.container input:checked ~ .checkMark:after {
+  display: block;
+}
+
+/* Style the.checkMark/indicator */
+.container .checkMark:after {
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+}
+
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
 
 
 /* Responsive media queries */
@@ -256,13 +408,42 @@ input:focus::placeholder {
     width: 100%;
   }
 
-  /* ... adjust other styles as needed for smaller screens ... */
 }
 
 /* Medium devices (768px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
-  /* ... adjust styles for medium-sized screens ... */
+  h1 {
+    font-size: 14px;
+  }
+
+  .todo-wrapper {
+    padding: 2%;
+    max-height: none;
+  }
+
+  .todo-input {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .todo-input-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .todo-input-item input {
+    width: 100%;
+  }
+  .todo-input-item label{
+    font-weight: 200;
+    font-size: 12px;
+  
+  }
+
 }
+
 
 /* Large devices (1024px and above) */
 @media (min-width: 1025px) {
