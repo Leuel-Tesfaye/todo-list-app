@@ -7,6 +7,15 @@ function App() {
   const [allTodo, setTodo] = useState([]) ;
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const handleAddTodo =() =>{
+    let newTodoItem = {
+      title:newTitle, 
+      description : newDescription
+    }
+    let updatedTodoArr = [...allTodo];
+    updatedTodoArr.push(newTodoItem)
+    setTodo(updatedTodoArr)
+  }
   return (
     <div className="App">
       <h1>My Todo's</h1>
@@ -14,16 +23,16 @@ function App() {
         <div className='todo-input'>   
           <div className="todo-input-item">
             <label>Title</label>
-            <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="What's the task title"/>
+            <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="Enter a task ..."/>
           </div>
 
           <div className="todo-input-item">
             <label>Description</label>
-            <input type="text" placeholder="What's the task Description"/>
+            <input type="text" value={newDescription} onChange={(e) =>setNewDescription (e.target.value)} placeholder=" Task Description...."/>
           </div>
 
           <div className="todo-input-item">
-            <button type="button" className="button">
+            <button type="button" className="button" onClick={handleAddTodo}>
               <span className="button__text">Add </span>
               <span className="button__icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" stroke="currentColor" height="24" fill="none" className="svg">
@@ -47,16 +56,20 @@ function App() {
         </div>
 
         <div className='todo-list'>
-          <div className='todo-list-item'>
+          {allTodo.map((item,index) =>{
+            return (
+              <div className='todo-list-item'>
             <div>
-            <h3>Task 1</h3>
-            <p>Description</p>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
             </div>
             <div>
           <MdDelete className= 'icon' />
           <BsCheckLg className= 'check-icon' />
           </div>
           </div>
+            )
+          })}
           
         </div>
       </div>
