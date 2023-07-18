@@ -66,6 +66,21 @@ h1{
   box-shadow: 0 0 5px #1f11e783;
   outline: none;
 }
+input::placeholder {
+  color: rgba(6, 6, 46, 0.87);
+  transition: color 0.3s ease;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+
+}
+input:focus::placeholder {
+  color: white;
+}
 
 .button {
   --main-focus: #2d8cf0;
@@ -210,3 +225,4 @@ h1{
 .check-icon:hover{
   color: rgb(4, 196, 106);
 }
+
