@@ -1,17 +1,20 @@
 
   @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,400&display=swap');
 
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300&display=swap');
+
 body{
   background-color: #1f1e1e;
   color: white;
   overflow: hidden;
-  font-family: 'Poppins';
   letter-spacing: 1px;
 }
 
 h1{
   text-align: center;
   color: rgb(238, 222, 5);
+  font-family: 'Poppins';
+
 }
 
 .todo-wrapper {
@@ -44,9 +47,11 @@ h1{
 }
 
 .todo-input-item label{
-  font-weight: bold;
+  font-weight: 400;
   margin-bottom: 10px;
   letter-spacing: 1px;
+  font-family: 'Poppins';
+
 }
 
 .todo-input-item input{
@@ -183,7 +188,7 @@ h1{
   color: rgb(161, 161, 161);
   margin-top: 8px;
   letter-spacing: .5px;
-
+  font-family: 'Roboto';
 }
 
 .icon {

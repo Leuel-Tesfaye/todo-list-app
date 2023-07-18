@@ -4,6 +4,9 @@ import { MdDelete } from 'react-icons/md';
 import { BsCheckLg } from 'react-icons/bs';
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
+  const [allTodo, setTodo] = useState([]) ;
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
   return (
     <div className="App">
       <h1>My Todo's</h1>
@@ -11,7 +14,7 @@ function App() {
         <div className='todo-input'>   
           <div className="todo-input-item">
             <label>Title</label>
-            <input type="text" placeholder="What's the task title"/>
+            <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="What's the task title"/>
           </div>
 
           <div className="todo-input-item">
