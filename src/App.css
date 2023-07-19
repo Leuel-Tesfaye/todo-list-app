@@ -398,6 +398,7 @@ input:focus::placeholder {
     align-items: flex-start;
     padding-bottom: 15px;
     margin-bottom: 15px;
+    width: fit-content;
   }
 
   .todo-input-item {
