@@ -73,7 +73,7 @@ input::placeholder {
   font-size: 12px;
   font-weight: bold;
   padding: 10px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 5px;
   padding: 5px;
 
@@ -299,6 +299,7 @@ input:focus::placeholder {
 .checkMark:hover {
   animation: jello-horizontal 0.9s both;
 }
+
 
 /* Create a custom checkbox */
 .checkMark {

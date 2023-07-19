@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { MdDelete } from "react-icons/md";
-import { BsCheckLg } from "react-icons/bs";
+// import { MdDelete } from "react-icons/md";
+// import { BsCheckLg } from "react-icons/bs";
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
   const [allTodo, setTodo] = useState([]);
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const [completedTodo , setCompletedTodo] = useState([]);
   const handleAddTodo = () => {
     let newTodoItem = {
       title: newTitle,
@@ -16,15 +17,58 @@ function App() {
     updatedTodoArr.push(newTodoItem);
     setTodo(updatedTodoArr);
     localStorage.setItem("todoList", JSON.stringify(updatedTodoArr));
+    setNewDescription ('')
+    setNewTitle ('')
   };
-
+    /** For deleting a todo  */
+    const handleTodoDelete = (index) => {
+      let reducedTodo = [...allTodo];
+      reducedTodo.splice(index, 1); // Remove 1 element at the specified index
+      localStorage.setItem("todoList", JSON.stringify(reducedTodo));
+      setTodo(reducedTodo);
+    };
+    /** For deleting the item in completed screen */
+    const handleCompletedDeleteTodo = (index) =>{
+      let reducedTodo = [...completedTodo];
+      reducedTodo.splice(index, 1); // Remove 1 element at the specified index
+      localStorage.setItem("todoList", JSON.stringify(reducedTodo));
+      setTodo(reducedTodo);
+    }
   /** use effect : when ever the page is loaded for the first time */
   useEffect(() => {
     let savedTodo = JSON.parse(localStorage.getItem("todoList"));
+    let savedCompletedTodo = JSON.parse(localStorage.getItem('completedTodo'));
     if (savedTodo) {
       setTodo(savedTodo);
     }
+
+    if(savedCompletedTodo) {
+      setCompletedTodo(savedCompletedTodo)
+    }
   }, []);
+
+  /** For completed screen  */
+  const handleComplete = (index) =>{
+      let now = new Date () ;
+      let dd = now.getDate()
+      let mm = now.getMonth() + 1;
+      let yyyy = now.getFullYear()
+      let h = now.getHours()
+      let m = now.getMinutes()
+      let s = now.getSeconds()
+      let completedOn = dd + "-" + mm + "-" + yyyy + ' at ' + h + ':' + m + ':' + s;
+      let filteredItem = {
+      ...allTodo[index] , 
+      completedOn : completedOn 
+      }
+      let updatedCompletedArr = [...completedTodo];
+      updatedCompletedArr.push(filteredItem)
+      setCompletedTodo(updatedCompletedArr)
+      handleTodoDelete (index)
+
+      localStorage.setItem("completedTodo", JSON.stringify(updatedCompletedArr));
+
+  }
   return (
     <div className="App">
       <h1>My Todo's</h1>
@@ -90,27 +134,53 @@ function App() {
         </div>
 
         <div className="todo-list">
-          {allTodo.map((item, index) => {
-            return (
-              <div className="todo-list-item">
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
+          {isCompleteScreen === false &&
+            allTodo.map((item, index) => {
+              return (
+                <div className="todo-list-item">
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                  <div className="icons">
+                    <button class="delete-button" onClick={() => handleTodoDelete(index)}>
+                      <svg class="delete-svgIcon" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                      </svg>
+                    </button>
+                    <label class="container">
+                      <input
+                        type="checkbox"
+                        checked="checked"
+                        onClick={() => handleComplete(index)}
+                      />
+                      <div class="checkMark"></div>
+                    </label>
+                  </div>
                 </div>
-                <div className="icons">
-                  <button class="delete-button">
-                    <svg class="delete-svgIcon" viewBox="0 0 448 512">
-                      <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-                    </svg>
-                  </button>
-                  <label class="container">
-                    <input type="checkbox" checked="checked" />
-                    <div class="checkMark"></div>
-                  </label>
+              );
+            })}
+
+          {isCompleteScreen === true &&
+            completedTodo.map((item, index) => {
+              return (
+                <div className="todo-list-item">
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <p><small>Completed On : {item.completedOn}</small></p>
+                  </div>
+                  <div className="icons">
+                    <button class="delete-button" onClick={() => handleCompletedDeleteTodo(index)}>
+                      <svg class="delete-svgIcon" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                      </svg>
+                    </button>
+                    
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     </div>
