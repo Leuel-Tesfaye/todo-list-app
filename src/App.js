@@ -32,7 +32,7 @@ function App() {
       let reducedTodo = [...completedTodo];
       reducedTodo.splice(index, 1); // Remove 1 element at the specified index
       localStorage.setItem("todoList", JSON.stringify(reducedTodo));
-      setTodo(reducedTodo);
+      setCompletedTodo(reducedTodo);
     }
   /** use effect : when ever the page is loaded for the first time */
   useEffect(() => {
