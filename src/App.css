@@ -453,3 +453,36 @@ input:focus::placeholder {
 @media (min-width: 1025px) {
   /* ... adjust styles for large screens ... */
 }
+
+.todo-input {
+  width: 100%; /* Takes full width by default */
+  padding: 10px;
+  font-size: 16px;
+  /* Other common CSS properties */
+}
+
+/* Media query for small devices */
+@media (max-width: 767px) {
+  .todo-input {
+    font-size: 14px; /* Adjust font size for small devices */
+    padding: 8px; /* Adjust padding for small devices */
+  }
+}
+
+/* Media query for medium devices */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .todo-input {
+    width: 80%; /* Adjust width for medium devices */
+    font-size: 16px; /* Reset font size for medium devices */
+    padding: 10px; /* Reset padding for medium devices */
+  }
+}
+
+/* Media query for large devices */
+@media (min-width: 1024px) {
+  .todo-input {
+    width: 300px; /* Adjust width for large devices */
+    font-size: 18px; /* Adjust font size for large devices */
+    padding: 12px; /* Adjust padding for large devices */
+  }
+}
