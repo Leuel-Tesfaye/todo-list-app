@@ -400,7 +400,9 @@ input:focus::placeholder {
     margin-bottom: 15px;
     width: fit-content;
   }
-
+.todo-input:focus {
+  width: fit-content;
+}
   .todo-input-item {
     margin-right: 0;
     margin-bottom: 15px;
